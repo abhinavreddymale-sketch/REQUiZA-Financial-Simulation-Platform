@@ -2,8 +2,10 @@
 Run: pip install -r requirements.txt && uvicorn main:app --reload"""
 from fastapi import FastAPI
 from pydantic import BaseModel, Field
+from auth import router as auth_router
 
 app = FastAPI(title="REQUiZA reference API (educational scenarios, not advice)")
+app.include_router(auth_router)
 
 class Sip(BaseModel):
     monthly: float = Field(ge=100, le=1_000_000)
